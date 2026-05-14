@@ -15,7 +15,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
   return (
-    <div className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+    <div className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-primary/30 transition-all duration-300 transform hover:-translate-y-1">
       {/* Image Container */}
       <Link href={`/products/${product.id}`} className="block relative h-56 w-full bg-gray-50 overflow-hidden">
         {product.image ? (
@@ -23,7 +23,7 @@ export function ProductCard({ product }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className="object-cover group-hover:scale-110 transition-transform duration-500"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         ) : (
@@ -31,16 +31,23 @@ export function ProductCard({ product }: ProductCardProps) {
             <span className="text-xs uppercase tracking-widest font-bold">Image Preview</span>
           </div>
         )}
-        {product.trending && (
-          <span className="absolute top-3 left-3 bg-accent text-accent-foreground text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">
-            TRENDING
-          </span>
-        )}
+        
+        {/* Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+          {product.trending && (
+            <span className="bg-accent text-primary text-[10px] font-bold px-2 py-1 rounded shadow-sm animate-bounce-in">
+              TRENDING
+            </span>
+          )}
+        </div>
         {product.originalPrice && (
-          <span className="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">
+          <span className="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 animate-pulse">
             -{Math.round((1 - product.price / product.originalPrice) * 100)}%
           </span>
         )}
+        
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
       </Link>
 
       {/* Content */}
@@ -57,7 +64,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {[...Array(5)].map((_, i) => (
             <Star 
               key={i} 
-              className={`h-3 w-3 ${i < Math.floor(product.rating) ? 'fill-accent text-accent' : 'fill-gray-200 text-gray-200'}`} 
+              className={`h-3 w-3 transition-colors duration-200 ${i < Math.floor(product.rating) ? 'fill-accent text-accent' : 'fill-gray-200 text-gray-200'}`} 
             />
           ))}
           <span className="text-xs font-bold text-gray-700 ml-1">{product.rating}</span>
@@ -67,14 +74,14 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Price & Action */}
         <div className="flex items-center justify-between pt-2">
           <div className="flex flex-col">
-            <span className="text-lg font-extrabold text-gray-900">${product.price}</span>
+            <span className="text-lg font-extrabold text-gray-900 group-hover:text-primary transition-colors">${product.price}</span>
             {product.originalPrice && (
               <span className="text-xs text-gray-400 line-through">${product.originalPrice}</span>
             )}
           </div>
           <Button 
             size="sm" 
-            className="rounded-full w-9 h-9 p-0 bg-primary hover:bg-primary/90"
+            className="rounded-full w-9 h-9 p-0 bg-primary hover:bg-primary/90 hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg"
             onClick={(e) => {
               e.preventDefault();
               addToCart(product);
