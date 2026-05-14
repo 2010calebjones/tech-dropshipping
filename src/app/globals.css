@@ -2,19 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 :root {
   --background: #ffffff;
-  --foreground: #333333;
+  --foreground: #1a1a2e;
   --primary: #0071CE;
   --accent: #FFC220;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+@theme {
+  --color-primary: #0071CE;
+  --color-accent: #FFC220;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
 }
 
 .container {
   max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
