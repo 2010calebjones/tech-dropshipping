@@ -1,0 +1,21 @@
+:root {
+  --background: #ffffff;
+  --foreground: #333333;
+  --primary: #0071CE;
+  --accent: #FFC220;
+}
+
+@theme {
+  --color-primary: #0071CE;
+  --color-accent: #FFC220;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+}
